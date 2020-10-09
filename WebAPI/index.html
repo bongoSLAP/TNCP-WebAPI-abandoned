@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        li {
+            list-style-type: none;
+        }
+    </style>
+    <title>TNCP API</title>
+</head>
+<body>
+
+    <div>
+        <h2>All Submissions</h2>
+        <ul id="submissions"/>
+    </div>
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+    <script>
+
+    var uri = 'api/Submissions';
+
+    $(document).ready(function () {
+        // Send an AJAX request
+        $.getJSON(uri).done(function (data) {
+            // On success, 'data' contains a list of products.
+            $.each(data, function (key, item) {
+                console.log("item: ", item);
+                let toJson = JSON.stringify(item, undefined, 2)
+                let formatted = toJson.split("\n");
+
+                // Add a list item for the product.
+                for (let i = 0; i < formatted.length; i++) {
+                    $('<li>', { text: formatted[i] }).appendTo($('#submissions'));
+                }
+                $('<br>').appendTo($('#submissions'));
+            });
+        });
+    });
+
+    $(document).ready(function () {
+        $.post(uri, function (data) {
+            console.log("data recieved: ", data);
+        });
+    });
+
+    </script>
+</body>
+</html>
