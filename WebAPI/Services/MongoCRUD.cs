@@ -32,6 +32,14 @@ namespace WebAPI.Services
             return collection.Find(filter).First();
         }
 
+        public List<T> LoadRecordsByUrl<T>(string table, string url)
+        {
+            var collection = db.GetCollection<T>(table);
+            var filter = Builders<T>.Filter.Eq("Url", url);
+
+            return collection.Find(filter).ToList();
+        }
+
         public void UpsertRecord<T>(string table, string id, T record)
         {
             var collection = db.GetCollection<T>(table);

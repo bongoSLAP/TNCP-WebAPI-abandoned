@@ -26,6 +26,12 @@ namespace WebAPI.Controllers
             return Ok(db.LoadRecordById<Submission>("Submissions", Id));
         }
 
+        public IHttpActionResult GetSubmissionsAtUrl(string Url)
+        {
+            System.Diagnostics.Debug.WriteLine("loading submissions at: ", Url);
+            return Ok(db.LoadRecordsByUrl<Submission>("Submissions", Url));
+        }
+
         public IHttpActionResult UpsertSubmission([FromBody] PrelimSubmission body, string Id)
         {
             System.Diagnostics.Debug.WriteLine("upserting: ", Id);
