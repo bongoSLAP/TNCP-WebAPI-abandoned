@@ -28,5 +28,7 @@ namespace WebAPI.Models
     {
         [JsonProperty(PropertyName = "submissionId")]
         public string Id { get; set; }
+        [JsonProperty(PropertyName = "urlOfArticle")]
+        public string Url { get; set; }
     }
 }

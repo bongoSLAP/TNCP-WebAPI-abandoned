@@ -26,6 +26,12 @@ namespace WebAPI.Controllers
             return Ok(db.LoadRecordById<Annotation>("Annotations", Id));
         }
 
+        public IHttpActionResult GetSubmissionsAtUrl(string Url)
+        {
+            System.Diagnostics.Debug.WriteLine("loading submissions at: ", Url);
+            return Ok(db.LoadRecordsByUrl<Annotation>("Annotations", Url));
+        }
+
         public IHttpActionResult UpsertAnnotation(string Id)
         {
             System.Diagnostics.Debug.WriteLine("upserting: ", Id);
