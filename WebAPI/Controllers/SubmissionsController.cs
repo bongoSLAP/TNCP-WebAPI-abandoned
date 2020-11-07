@@ -26,6 +26,12 @@ namespace WebAPI.Controllers
             return Ok(db.LoadRecordById<Submission>("Submissions", Id));
         }
 
+        public IHttpActionResult GetSubmissionAssignedTo(string AssignedTo)
+        {
+            System.Diagnostics.Debug.WriteLine("loading: ", AssignedTo);
+            return Ok(db.LoadSubmissionByAssignedTo<Submission>(AssignedTo));
+        }
+
         public IHttpActionResult GetSubmissionsAtUrl(string Url)
         {
             System.Diagnostics.Debug.WriteLine("loading submissions at: ", Url);
@@ -45,6 +51,5 @@ namespace WebAPI.Controllers
             db.DeleteRecord<Submission>("Submissions", Id);
             return Ok();
         }
-
     }
 }
