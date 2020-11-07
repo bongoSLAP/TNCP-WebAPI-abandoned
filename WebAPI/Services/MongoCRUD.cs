@@ -32,6 +32,14 @@ namespace WebAPI.Services
             return collection.Find(filter).First();
         }
 
+        public T LoadSubmissionByAssignedTo<T>(string id)
+        {
+            var collection = db.GetCollection<T>("Submissions");
+            var filter = Builders<T>.Filter.Eq("AssignedTo", id);
+
+            return collection.Find(filter).First();
+        }
+
         public List<T> LoadRecordsByUrl<T>(string table, string url)
         {
             var collection = db.GetCollection<T>(table);
